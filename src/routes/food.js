@@ -5,43 +5,35 @@ const { FoodModel } = require('../models');
 
 const router = express.Router();
 
-// router.post('/food', async (req, res, next) => {
-//   let newFoodData = req.body;
-//   let responseData = await FoodModel.create(newFoodData);
-//   res.send(responseData);
-// });
 
-// router.post('/food', async (req, res, next) => {
-//   let food = req.body;
-//   console.log(req.body);
-
-//   let response = await FoodModel.create(food);
-//   res.status(200).send(response);
-// });
+router.post('/food', async (req, res, next) => {
+  let food = req.body;
+  let response = await FoodModel.create(food);
+  res.status(200).send(response);
+});
 
 router.get('/food', async (req, res, next) => {
-  let getFoodData = req.body;
-  let responseData = await FoodModel.findAll(getFoodData);
-  res.send(responseData) ;
+  let allFoods = await FoodModel.readAll();
+  res.status(200).send(allFoods);
 });
 
 router.get('/food/:id', async (req, res, next) => {
-  let getSingleFoodData = req.params.id;
-  let responseData = await FoodModel.findOne({ where: { id: getSingleFoodData } });
-  res.send(responseData) ;
+  let { id } = req.params;
+  let oneFood = await FoodModel.readAll();
+  res.status(200).send(oneFood);
 });
 
 router.put('/food/:id', async (req, res, next) => {
-  let putSingleFoodData = req.params.id;
-  let responseData = await FoodModel.update({calories: req.body.calories, foodGroup: req.body.foodGroup}, { where: { id: putSingleFoodData } });
-  res.send(responseData) ;
+  let { id } = req.params;
+  await FoodModel.update(req.body, {where: { id }});
+  let updatedFood = await FoodModel.findOne({where: { id }});
+  res.status(200).send(updatedFood);
 });
 
 router.delete('/food/:id', async (req, res, next) => {
-  let deleteSingleFoodData = req.params.id;
-  let responseData = await FoodModel.destroy({ where: {deleteSingleFoodData} });
-  res.send(responseData) ;
+  let { id } = req.params;
+  let deletedTeam = await FoodModel.delete(id);
+  res.status(200).send(deletedFood);
 });
 
 module.exports = router;
-

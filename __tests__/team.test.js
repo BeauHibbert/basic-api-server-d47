@@ -1,9 +1,9 @@
 'use strict';
 
 const supertest = require('supertest');
-const server = require('../src/server/app.js');
+const server = require('../src/server');
 const { sequelize } = require('../src/models');
-const request = supertest(server.app);
+const request = supertest(server);
 
 beforeAll(async () => {
   await sequelize.sync();
