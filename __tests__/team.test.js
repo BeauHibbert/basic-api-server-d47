@@ -1,7 +1,7 @@
 'use strict';
 
 const supertest = require('supertest');
-const server = require('../src/server');
+const { server } = require('../src/server');
 const { sequelize } = require('../src/models');
 const request = supertest(server);
 
@@ -14,7 +14,6 @@ afterAll(async () => {
 });
 
 describe('Testing REST API', () => {
-
   test('Create a team', async() => {
     let response = await request.post('/team').send({
       name: 'cougs',
@@ -28,17 +27,18 @@ describe('Testing REST API', () => {
     expect(response.body.losses).toEqual(0);
   });
 
-  test('Should read from people', () => {
-    expect(true).toBe(false);
-  });
+  // test('Should read from team', () => {
+  //   let response = await request.get('/team');
+  //   expect(response.status).toEqual(200);
+  // });
 
-  test('Should update a person', () => {
-    expect(true).toBe(false);
-  });
+  // test('Should update a team', () => {
+  //   expect(true).toBe(false);
+  // });
 
-  test('Should delete a person', () => {
-    expect(true).toBe(false);
-  });
+  // test('Should delete a team', () => {
+  //   expect(true).toBe(false);
+  // });
 });
 
 

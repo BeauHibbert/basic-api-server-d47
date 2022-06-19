@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "NODE_ENV=test jest --verbose --watchAll",
+    "test-watch": "NODE_ENV=test jest --watchAll --verbose --coverage",
     "start": "node index.js",
     "db:config": "sequelize init:config",
     "db:create": "sequelize db:create"
