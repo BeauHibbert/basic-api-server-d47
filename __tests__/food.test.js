@@ -1,8 +1,8 @@
 'use strict';
 
 const supertest = require('supertest');
+const { server } = require('../src/server');
 const { sequelize } = require('../src/models');
-const server = require('../src/server/');
 const request = supertest(server.app);
 
 beforeAll(async () => {
@@ -14,7 +14,7 @@ afterAll(async () => {
 });
 
 describe('Testing REST API requests to food routes', () => {
-  test('Should create a food record', async () => {
+  test('Create a food', async () => {
     let response = await request.post('/food').send({
       calories: 150,
       foodGroup: 'vegetables',
@@ -25,14 +25,14 @@ describe('Testing REST API requests to food routes', () => {
     expect(response.body.foodGroup).toEqual('vegetables');
   });
 
-  test('Should create a food record', async () => {
-    let response = await request.post('/food').send({
-      calories: 150,
-      foodGroup: 'vegetables',
-    });
+//   test('Should create a food record', async () => {
+//     let response = await request.post('/food').send({
+//       calories: 150,
+//       foodGroup: 'vegetables',
+//     });
 
-    expect(response.status).toEqual(200);
-    expect(response.body.calories).toEqual(150);
-    expect(response.body.foodGroup).toEqual('vegetables');
-  });
+//     expect(response.status).toEqual(200);
+//     expect(response.body.calories).toEqual(150);
+//     expect(response.body.foodGroup).toEqual('vegetables');
+//   });
 });
